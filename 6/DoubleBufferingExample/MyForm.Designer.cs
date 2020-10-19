@@ -35,7 +35,6 @@
             // MoveTimer
             // 
             this.MoveTimer.Enabled = true;
-            this.MoveTimer.Interval = 10;
             this.MoveTimer.Tick += new System.EventHandler(this.MoveTimer_Tick);
             // 
             // MyForm
