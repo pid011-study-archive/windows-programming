@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Windows.Forms;
 
 namespace ShootingStar
@@ -42,7 +41,6 @@ namespace ShootingStar
             {
                 previousForm.Close();
                 GC.Collect(); // buffer, graphics같은 쓰레기 객체들 수집
-                Debug.WriteLine("Garbage collected");
             }
         }
     }
