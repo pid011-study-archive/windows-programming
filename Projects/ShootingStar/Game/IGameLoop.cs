@@ -1,10 +1,9 @@
 ﻿using System.Drawing;
 
-namespace ShootingStar
+namespace ShootingStar.Game
 {
-    public interface IGameLoop<T>
+    public interface IGameLoop
     {
-        void Init(T init);
         void Update();
         void Draw(Graphics graphics);
     }

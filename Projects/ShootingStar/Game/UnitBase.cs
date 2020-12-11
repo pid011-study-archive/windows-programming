@@ -3,7 +3,7 @@ using System.Drawing;
 
 namespace ShootingStar.Game
 {
-    public class UnitBase : IGameLoop<UnitBase>
+    public class UnitBase : IGameLoop
     {
         public int Speed;
         public int Hp;

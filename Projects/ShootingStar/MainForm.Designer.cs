@@ -45,6 +45,7 @@ namespace ShootingStar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ClientSize = new System.Drawing.Size(634, 861);
             this.Controls.Add(this.container);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;

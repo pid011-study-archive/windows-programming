@@ -40,6 +40,7 @@ namespace ShootingStar
             _buffer = new Bitmap(ClientSize.Width, ClientSize.Height);
             _graphics = Graphics.FromImage(_buffer);
             _graphics.Clear(Color.Black);
+            GlobalBackground.Instance.Draw(_graphics);
             Invalidate();
 
             tickTimer.Start();
@@ -126,6 +127,8 @@ namespace ShootingStar
                 MainForm.Instance.SetForm<MainMenuForm>();
             }
 
+            GlobalBackground.Instance.Update();
+
             if (_player.IsAlive)
             {
                 // User Input
@@ -180,6 +183,8 @@ namespace ShootingStar
             _enemies = _enemies.Where(x => x.IsAlive).ToList();
             _playerBullets = _playerBullets.Where(x => x.IsAlive).ToList();
             _enemyBullets = _enemyBullets.Where(x => x.IsAlive).ToList();
+
+            GlobalBackground.Instance.Draw(_graphics);
 
             // Draw player
             if (_player.IsAlive)

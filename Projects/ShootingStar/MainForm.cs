@@ -5,6 +5,9 @@ namespace ShootingStar
 {
     public partial class MainForm : Form
     {
+        public const int FormHeight = 900;
+        public const int FormWidth = 650;
+
         /// <summary>
         /// Simgleton instance
         /// </summary>
@@ -25,12 +28,16 @@ namespace ShootingStar
                 throw new Exception("MainForm cannot be set.");
             }
 
+            // form 인스턴스 생성
             var form = Activator.CreateInstance<T>();
+
+            // 테두리를 없애고 패널에 맞추기
             form.Dock = DockStyle.Fill;
             form.TopLevel = false;
             form.TopMost = true;
             form.FormBorderStyle = FormBorderStyle.None;
 
+            // 이전 form과 위에서 생성한 form 교체
             var previousForm = _currentForm;
             _currentForm = form;
 
@@ -43,5 +50,6 @@ namespace ShootingStar
                 GC.Collect(); // buffer, graphics같은 쓰레기 객체들 수집
             }
         }
+
     }
 }

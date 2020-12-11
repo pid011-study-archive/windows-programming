@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using ShootingStar.Game;
 
 namespace ShootingStar
 {
@@ -23,7 +24,8 @@ namespace ShootingStar
         {
             _buffer = new Bitmap(ClientSize.Width, ClientSize.Height);
             _graphics = Graphics.FromImage(_buffer);
-            _graphics.Clear(Color.Black);
+            _graphics.Clear(Color.Blue);
+            GlobalBackground.Instance.Draw(_graphics);
             Invalidate();
             tickTimer.Start();
         }
@@ -39,14 +41,25 @@ namespace ShootingStar
 
         private void tickTimer_Tick(object sender, EventArgs e)
         {
-            _graphics.Clear(Color.Black);
-
+            _graphics.Clear(Color.Blue);
+            GlobalBackground.Instance.Update();
+            GlobalBackground.Instance.Draw(_graphics);
             Invalidate();
         }
 
         private void startButton_Click(object sender, EventArgs e)
         {
             MainForm.Instance.SetForm<GameForm>();
+        }
+
+        private void helpButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void exitButton_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

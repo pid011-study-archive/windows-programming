@@ -60,9 +60,10 @@ namespace ShootingStar
             // 
             // title
             // 
-            this.title.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.title.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.title.AutoSize = true;
+            this.title.BackColor = System.Drawing.Color.Transparent;
             this.title.Font = new System.Drawing.Font("NeoDunggeunmo Pro", 32.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.title.ForeColor = System.Drawing.Color.White;
             this.title.Location = new System.Drawing.Point(182, 250);
@@ -74,8 +75,8 @@ namespace ShootingStar
             // 
             // helpButton
             // 
-            this.helpButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.helpButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.helpButton.BackColor = System.Drawing.Color.Transparent;
             this.helpButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
@@ -88,12 +89,12 @@ namespace ShootingStar
             this.helpButton.TabIndex = 0;
             this.helpButton.Text = "도움말";
             this.helpButton.UseVisualStyleBackColor = false;
-            this.helpButton.Click += new System.EventHandler(this.startButton_Click);
+            this.helpButton.Click += new System.EventHandler(this.helpButton_Click);
             // 
             // exitButton
             // 
-            this.exitButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.exitButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.exitButton.BackColor = System.Drawing.Color.Transparent;
             this.exitButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
@@ -106,13 +107,13 @@ namespace ShootingStar
             this.exitButton.TabIndex = 0;
             this.exitButton.Text = "나가기";
             this.exitButton.UseVisualStyleBackColor = false;
-            this.exitButton.Click += new System.EventHandler(this.startButton_Click);
+            this.exitButton.Click += new System.EventHandler(this.exitButton_Click);
             // 
             // MainMenuForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.Black;
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(634, 861);
             this.Controls.Add(this.title);
             this.Controls.Add(this.startButton);

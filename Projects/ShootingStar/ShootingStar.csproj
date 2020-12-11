@@ -66,6 +66,8 @@
   <ItemGroup>
     <Compile Include="CustomFont.cs" />
     <Compile Include="Game\Background.cs" />
+    <Compile Include="Game\BackgroundScroller.cs" />
+    <Compile Include="Game\Direction.cs" />
     <Compile Include="Game\EnemyBullet.cs" />
     <Compile Include="Game\EnemyUnit.cs" />
     <Compile Include="GameForm.cs">
@@ -74,7 +76,8 @@
     <Compile Include="GameForm.Designer.cs">
       <DependentUpon>GameForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="IGameLoop.cs" />
+    <Compile Include="Game\IGameLoop.cs" />
+    <Compile Include="Game\GlobalBackground.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -120,7 +123,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="Resources\neodgm_pro.ttf" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -137,30 +139,11 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <Content Include="Resources\UI\button.png" />
+    <None Include="Resources\Sprites\background1.png" />
+  </ItemGroup>
+  <ItemGroup>
     <Resource Include="Resources\icon.ico" />
-    <Content Include="Resources\icon.png" />
-    <Content Include="Resources\Sprites\enemy0_0.png" />
-    <Content Include="Resources\Sprites\enemy0_1.png" />
-    <Content Include="Resources\Sprites\enemy1_0.png" />
-    <Content Include="Resources\Sprites\enemy1_1.png" />
-    <Content Include="Resources\Sprites\enemy2_0.png" />
-    <Content Include="Resources\Sprites\enemy3_0.png" />
-    <Content Include="Resources\Sprites\enemy_bullet.png" />
-    <Content Include="Resources\Sprites\enemy_destroy0.png" />
-    <Content Include="Resources\Sprites\enemy_destroy1.png" />
-    <Content Include="Resources\Sprites\enemy_destroy2.png" />
-    <Content Include="Resources\Sprites\enemy_destroy3.png" />
-    <Content Include="Resources\Sprites\enemy_destroy4.png" />
-    <Content Include="Resources\Sprites\fighter0.png" />
-    <Content Include="Resources\Sprites\fighter_bullet.png" />
-    <Content Include="Resources\Sprites\fighter_destroy0.png" />
-    <Content Include="Resources\Sprites\fighter_destroy1.png" />
-    <Content Include="Resources\Sprites\fighter_destroy2.png" />
-    <Content Include="Resources\Sprites\fighter_destroy3.png" />
-    <Content Include="Resources\Sprites\heart.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
