@@ -33,6 +33,10 @@ namespace ShootingStar
 
         private Random _random;
 
+        private bool _isGameOver;
+
+        private readonly Font _gameOverFont = new Font(CustomFont.NeoDgm, 32);
+
         public GameForm()
         {
             InitializeComponent();
@@ -134,6 +138,18 @@ namespace ShootingStar
             GlobalBackground.Instance.Draw(_graphics);
             DrawUnits();
             DrawAnimations();
+
+            if (_isGameOver)
+            {
+                _graphics.DrawString(
+                    "GAME OVER",
+                    _gameOverFont,
+                    Brushes.White,
+                    ClientSize.Width / 2,
+                    ClientSize.Height / 2 - 50,
+                    new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center }
+                    );
+            }
 
             Invalidate();
         }
@@ -341,6 +357,7 @@ namespace ShootingStar
                     {
                         _player.IsAlive = false;
                         _playerDestroy = new PlayerDestroyAnimation(_player.Position);
+                        SetGameOver();
                     }
                 }
             }
@@ -362,6 +379,37 @@ namespace ShootingStar
 
             var result = Rectangle.Intersect(unitARect, unitBRect);
             return !result.IsEmpty;
+        }
+
+        private void SetGameOver()
+        {
+            // 딱 한번만 실행하도록 함
+            if (_isGameOver)
+            {
+                return;
+            }
+
+            var mainMenuButton = new Button
+            {
+                Name = "mainMenuButton",
+                TabIndex = 0,
+                ForeColor = Color.FromArgb(64, 64, 64),
+                MaximumSize = new Size(200, 50),
+                Size = new Size(200, 50),
+                Text = "메인메뉴로 이동",
+                Font = new Font(CustomFont.NeoDgm, 16),
+            };
+            mainMenuButton.Location = new Point(
+                (ClientSize.Width / 2) - (mainMenuButton.Size.Width / 2),
+                (ClientSize.Height / 2) - (mainMenuButton.Size.Height / 2));
+
+            mainMenuButton.Click += (sender, e) =>
+            {
+                MainForm.Instance.SetForm<MainMenuForm>();
+            };
+
+            Controls.Add(mainMenuButton);
+            _isGameOver = true;
         }
     }
 }
