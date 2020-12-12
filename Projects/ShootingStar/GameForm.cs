@@ -28,6 +28,9 @@ namespace ShootingStar
         private List<PlayerBullet> _playerBullets = new List<PlayerBullet>();
         private List<EnemyBullet> _enemyBullets = new List<EnemyBullet>();
 
+        private List<EnemyDestroyAnimation> _enemyDestories = new List<EnemyDestroyAnimation>();
+        private PlayerDestroyAnimation _playerDestroy;
+
         private Random _random;
 
         public GameForm()
@@ -52,7 +55,7 @@ namespace ShootingStar
                 MaxHp = 1,
                 Speed = 10,
                 FireRate = 5,
-                UnitImage = Resources.fighter0,
+                UnitImage = Resources.image_fighter0,
             };
             _player.SetInitialPosition();
             _player.Reset();
@@ -61,10 +64,10 @@ namespace ShootingStar
             {
                 MaxHp = 1,
                 Speed = 20,
-                UnitImage = Resources.fighter_bullet,
+                UnitImage = Resources.image_fighter_bullet,
             };
 
-            var enemyA = Resources.enemy0_0;
+            var enemyA = Resources.image_enemy0_0;
             enemyA.RotateFlip(RotateFlipType.Rotate180FlipX);
             _enemyTypeA = new EnemyUnit(this)
             {
@@ -75,7 +78,7 @@ namespace ShootingStar
                 UnitImage = enemyA,
             };
 
-            var enemyB = Resources.enemy1_0;
+            var enemyB = Resources.image_enemy1_0;
             enemyB.RotateFlip(RotateFlipType.Rotate180FlipX);
             _enemyTypeB = new EnemyUnit(this)
             {
@@ -86,7 +89,7 @@ namespace ShootingStar
                 UnitImage = enemyB,
             };
 
-            var enemyC = Resources.enemy2_0;
+            var enemyC = Resources.image_enemy2_0;
             enemyC.RotateFlip(RotateFlipType.Rotate180FlipX);
             _enemyTypeC = new EnemyUnit(this)
             {
@@ -97,7 +100,7 @@ namespace ShootingStar
                 UnitImage = enemyC,
             };
 
-            var enemyBulletImage = Resources.enemy_bullet;
+            var enemyBulletImage = Resources.image_enemy_bullet;
             enemyBulletImage.RotateFlip(RotateFlipType.Rotate180FlipX);
             _enemyBulletType = new EnemyBullet(this)
             {
@@ -120,15 +123,23 @@ namespace ShootingStar
         {
             _graphics.Clear(Color.Black);
 
-            if (!_player.IsAlive)
-            {
-                tickTimer.Stop();
-                MessageBox.Show("You dead!");
-                MainForm.Instance.SetForm<MainMenuForm>();
-            }
-
             GlobalBackground.Instance.Update();
 
+            UpdateUnits();
+            CheckUnitDetect();
+            UpdateAnimation();
+
+            RefreshAll();
+
+            GlobalBackground.Instance.Draw(_graphics);
+            DrawUnits();
+            DrawAnimations();
+
+            Invalidate();
+        }
+
+        private void UpdateUnits()
+        {
             if (_player.IsAlive)
             {
                 // User Input
@@ -173,19 +184,39 @@ namespace ShootingStar
             {
                 bullet.Update();
             }
+        }
 
+        private void CheckUnitDetect()
+        {
             if (_player.IsAlive)
             {
                 DetectPlayerBulletCollision();
                 DetectEnemyBulletCollision();
             }
+        }
 
+        private void UpdateAnimation()
+        {
+            foreach (var animation in _enemyDestories)
+            {
+                animation.Update();
+            }
+            _playerDestroy?.Update();
+        }
+        private void RefreshAll()
+        {
             _enemies = _enemies.Where(x => x.IsAlive).ToList();
             _playerBullets = _playerBullets.Where(x => x.IsAlive).ToList();
             _enemyBullets = _enemyBullets.Where(x => x.IsAlive).ToList();
+            _enemyDestories = _enemyDestories.Where(x => x.FramePosition < x.FrameCount).ToList();
+            if ((_playerDestroy != null) && (_playerDestroy.FramePosition >= _playerDestroy.FrameCount))
+            {
+                _playerDestroy = null;
+            }
+        }
 
-            GlobalBackground.Instance.Draw(_graphics);
-
+        private void DrawUnits()
+        {
             // Draw player
             if (_player.IsAlive)
             {
@@ -209,10 +240,17 @@ namespace ShootingStar
             {
                 bullet.Draw(_graphics);
             }
-
-            Invalidate();
         }
 
+        private void DrawAnimations()
+        {
+            foreach (var animation in _enemyDestories)
+            {
+                animation.Draw(_graphics);
+            }
+
+            _playerDestroy?.Draw(_graphics);
+        }
         private void SpawnEnemy()
         {
             if (_enemies.Count < 10)
@@ -284,6 +322,7 @@ namespace ShootingStar
                         if (enemy.Hp <= 0)
                         {
                             enemy.IsAlive = false;
+                            _enemyDestories.Add(new EnemyDestroyAnimation(enemy.Position));
                         }
                     }
                 }
@@ -301,6 +340,7 @@ namespace ShootingStar
                     if (_player.Hp <= 0)
                     {
                         _player.IsAlive = false;
+                        _playerDestroy = new PlayerDestroyAnimation(_player.Position);
                     }
                 }
             }

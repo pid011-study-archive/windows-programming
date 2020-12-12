@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GameForm));
             this.tickTimer = new System.Windows.Forms.Timer(this.components);
+            this.destroyTimer = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // tickTimer
@@ -55,6 +56,7 @@
         #endregion
 
         private System.Windows.Forms.Timer tickTimer;
+        private System.Windows.Forms.Timer destroyTimer;
     }
 }
 

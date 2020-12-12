@@ -22,13 +22,13 @@ namespace ShootingStar
         {
             var fonts = new PrivateFontCollection();
 
-            var fontData = Resources.neodgm_pro;
+            var fontData = Resources.font_neodgm_pro;
 
             var fontPtr = System.Runtime.InteropServices.Marshal.AllocCoTaskMem(fontData.Length);
             System.Runtime.InteropServices.Marshal.Copy(fontData, 0, fontPtr, fontData.Length);
             uint dummy = 0;
-            fonts.AddMemoryFont(fontPtr, Resources.neodgm_pro.Length);
-            AddFontMemResourceEx(fontPtr, (uint)Resources.neodgm_pro.Length, IntPtr.Zero, ref dummy);
+            fonts.AddMemoryFont(fontPtr, Resources.font_neodgm_pro.Length);
+            AddFontMemResourceEx(fontPtr, (uint)Resources.font_neodgm_pro.Length, IntPtr.Zero, ref dummy);
             System.Runtime.InteropServices.Marshal.FreeCoTaskMem(fontPtr);
 
             return fonts.Families[0];

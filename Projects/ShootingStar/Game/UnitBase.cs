@@ -5,6 +5,14 @@ namespace ShootingStar.Game
 {
     public class UnitBase : IGameLoop
     {
+        //public Point CenterPosition
+        //{
+        //    get
+        //    {
+        //        return new Point(Position.X - (UnitImage.Width / 2), Position.Y - (UnitImage.Height / 2));
+        //    }
+        //}
+
         public int Speed;
         public int Hp;
         public int MaxHp;

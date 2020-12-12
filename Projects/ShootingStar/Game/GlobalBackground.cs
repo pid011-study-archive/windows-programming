@@ -14,11 +14,11 @@ namespace ShootingStar.Game
         {
             _backgrounds = new List<BackgroundScroller>
             {
-                new BackgroundScroller(Resources.background0)
+                new BackgroundScroller(Resources.image_background0)
                 {
                     Speed = 3
                 },
-                new BackgroundScroller(Resources.background1)
+                new BackgroundScroller(Resources.image_background1)
                 {
                     Speed = 4
                 }

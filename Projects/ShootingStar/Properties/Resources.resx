@@ -118,70 +118,91 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="enemy_destroy0" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="image_enemy_destroy0" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Sprites\enemy_destroy0.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="enemy_destroy2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="image_enemy_destroy2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Sprites\enemy_destroy2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="enemy_destroy4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="image_enemy_destroy4" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Sprites\enemy_destroy4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="enemy0_0" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="image_enemy0_0" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Sprites\enemy0_0.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="fighter_destroy2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="image_fighter_destroy2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Sprites\fighter_destroy2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="enemy_destroy3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="image_enemy_destroy3" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Sprites\enemy_destroy3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="enemy_destroy1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="image_enemy_destroy1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Sprites\enemy_destroy1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="enemy0_1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="image_enemy0_1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Sprites\enemy0_1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="fighter_destroy1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="image_fighter_destroy1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Sprites\fighter_destroy1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="enemy3_0" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="image_enemy3_0" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Sprites\enemy3_0.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="enemy2_0" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="image_enemy2_0" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Sprites\enemy2_0.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="enemy1_0" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="image_enemy1_0" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Sprites\enemy1_0.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="fighter_destroy0" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="image_fighter_destroy0" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Sprites\fighter_destroy0.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="enemy_bullet" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="image_enemy_bullet" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Sprites\enemy_bullet.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="fighter_bullet" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="image_fighter_bullet" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Sprites\fighter_bullet.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="heart" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="image_heart" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Sprites\heart.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="enemy1_1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="image_enemy1_1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Sprites\enemy1_1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="fighter0" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="image_fighter0" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Sprites\fighter0.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="fighter_destroy3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="image_fighter_destroy3" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Sprites\fighter_destroy3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="neodgm_pro" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="font_neodgm_pro" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\neodgm_pro.ttf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="background0" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="image_background0" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Sprites\background0.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="background1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="image_background1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Sprites\background1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="audio_bgm" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Sounds\bgm.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="audio_click" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Sounds\click.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="audio_coin" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Sounds\coin.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="audio_destroy" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Sounds\destroy.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="audio_gamover" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Sounds\gamover.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="audio_shot" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Sounds\shot.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

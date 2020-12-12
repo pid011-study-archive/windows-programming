@@ -48,7 +48,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Resources\icon.ico</ApplicationIcon>
+    <ApplicationIcon>
+    </ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -67,8 +68,10 @@
     <Compile Include="CustomFont.cs" />
     <Compile Include="Game\Background.cs" />
     <Compile Include="Game\BackgroundScroller.cs" />
+    <Compile Include="Game\DestroyAnimation.cs" />
     <Compile Include="Game\Direction.cs" />
     <Compile Include="Game\EnemyBullet.cs" />
+    <Compile Include="Game\EnemyDestroyAnimation.cs" />
     <Compile Include="Game\EnemyUnit.cs" />
     <Compile Include="GameForm.cs">
       <SubType>Form</SubType>
@@ -78,6 +81,7 @@
     </Compile>
     <Compile Include="Game\IGameLoop.cs" />
     <Compile Include="Game\GlobalBackground.cs" />
+    <Compile Include="Game\PlayerDestroyAnimation.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -138,12 +142,6 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Sprites\background1.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\icon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
