@@ -7,12 +7,18 @@ namespace ShootingStar
 {
     public partial class HelpForm : Form
     {
-        private Bitmap _buffer;
-        private Graphics _graphics;
+        private readonly Bitmap _buffer;
+        private readonly Graphics _graphics;
 
         public HelpForm()
         {
             InitializeComponent();
+
+            _buffer = new Bitmap(ClientSize.Width, ClientSize.Height);
+            _graphics = Graphics.FromImage(_buffer);
+            _graphics.Clear(Color.Blue);
+            GlobalBackground.Instance.Draw(_graphics);
+
             descLabel1.Font = new Font(CustomFont.NeoDgmPro, 16);
             descLabel2.Font = new Font(CustomFont.NeoDgmPro, 16);
             descLabel3.Font = new Font(CustomFont.NeoDgmPro, 16);
@@ -21,10 +27,6 @@ namespace ShootingStar
 
         private void HelpForm_Load(object sender, EventArgs e)
         {
-            _buffer = new Bitmap(ClientSize.Width, ClientSize.Height);
-            _graphics = Graphics.FromImage(_buffer);
-            _graphics.Clear(Color.Blue);
-            GlobalBackground.Instance.Draw(_graphics);
             Invalidate();
             tickTimer.Start();
         }

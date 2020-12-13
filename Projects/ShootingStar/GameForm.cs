@@ -14,8 +14,8 @@ namespace ShootingStar
         [DllImport("User32.dll")]
         private static extern short GetKeyState(int nVirtualKey);
 
-        private Bitmap _buffer;
-        private Graphics _graphics;
+        private readonly Bitmap _buffer;
+        private readonly Graphics _graphics;
 
         private PlayerUnit _player;
         private EnemyUnit _enemyTypeA;
@@ -34,6 +34,7 @@ namespace ShootingStar
         private Random _random;
 
         private bool _isGameOver;
+        private string _gameOverReason;
 
         private bool _attacked;
 
@@ -44,12 +45,20 @@ namespace ShootingStar
         private int _score;
         private bool _pause;
 
+        private int _timeLimit;
+
         private readonly Font _gameOverFont = new Font(CustomFont.NeoDgmPro, 32);
         private readonly Font _scoreFont = new Font(CustomFont.NeoDgmPro, 16);
 
         public GameForm()
         {
             InitializeComponent();
+
+            _buffer = new Bitmap(ClientSize.Width, ClientSize.Height);
+            _graphics = Graphics.FromImage(_buffer);
+            _graphics.Clear(Color.Black);
+            GlobalBackground.Instance.Draw(_graphics);
+
             pauseLabel.Font = new Font(CustomFont.NeoDgmPro, 32);
             resumeButton.Font = new Font(CustomFont.NeoDgmPro, 16);
             restartButton.Font = new Font(CustomFont.NeoDgmPro, 16);
@@ -59,10 +68,6 @@ namespace ShootingStar
 
         private void MainGame_Load(object sender, EventArgs e)
         {
-            _buffer = new Bitmap(ClientSize.Width, ClientSize.Height);
-            _graphics = Graphics.FromImage(_buffer);
-            _graphics.Clear(Color.Black);
-            GlobalBackground.Instance.Draw(_graphics);
             Invalidate();
 
             tickTimer.Start();
@@ -129,6 +134,8 @@ namespace ShootingStar
             };
 
             _score = 0;
+            _timeLimit = 20;
+            timeLimtTimer.Start();
         }
 
         private void MainGame_Paint(object sender, PaintEventArgs e)
@@ -152,7 +159,7 @@ namespace ShootingStar
         {
             _graphics.Clear(Color.Black);
 
-            if (!_pause)
+            if (!_pause && _timeLimit > 0)
             {
                 GlobalBackground.Instance.Update();
 
@@ -167,6 +174,7 @@ namespace ShootingStar
             DrawUnits();
             DrawAnimations();
             DrawPlayerHeart();
+            DrawTimeLimit();
             DrawScore();
             DrawGameOverUI();
 
@@ -304,9 +312,21 @@ namespace ShootingStar
             }
         }
 
-        private void DrawScore()
+        private void DrawTimeLimit()
         {
             var drawPosition = new Point(ClientSize.Width - 10, 10);
+            var strformat = new StringFormat
+            {
+                Alignment = StringAlignment.Far,
+                LineAlignment = StringAlignment.Near
+            };
+
+            _graphics.DrawString($"남은 시간 : {_timeLimit}초", _scoreFont, Brushes.White, drawPosition, strformat);
+        }
+
+        private void DrawScore()
+        {
+            var drawPosition = new Point(ClientSize.Width - 10, 40);
             var strformat = new StringFormat
             {
                 Alignment = StringAlignment.Far,
@@ -321,7 +341,7 @@ namespace ShootingStar
             if (_isGameOver)
             {
                 _graphics.DrawString(
-                    "당신은 파괴되었습니다",
+                    _gameOverReason,
                     _gameOverFont,
                     Brushes.White,
                     ClientSize.Width / 2,
@@ -443,7 +463,7 @@ namespace ShootingStar
                     {
                         _player.IsAlive = false;
                         _playerDestroy = new PlayerDestroyAnimation(_player.Position);
-                        SetGameOver();
+                        SetGameOver("당신은 파괴되었습니다", false);
                     }
                     else
                     {
@@ -472,7 +492,7 @@ namespace ShootingStar
             return !result.IsEmpty;
         }
 
-        private void SetGameOver()
+        private void SetGameOver(string reason, bool isGameClear)
         {
             // 딱 한번만 실행하도록 함
             if (_isGameOver)
@@ -487,7 +507,6 @@ namespace ShootingStar
                 ForeColor = Color.FromArgb(64, 64, 64),
                 MaximumSize = new Size(250, 50),
                 Size = new Size(250, 50),
-                Text = "처음화면으로 이동",
                 Font = new Font(CustomFont.NeoDgmPro, 16),
             };
 
@@ -495,14 +514,29 @@ namespace ShootingStar
                 (ClientSize.Width / 2) - (mainMenuButton.Size.Width / 2),
                 (ClientSize.Height / 2) - (mainMenuButton.Size.Height / 2));
 
-            mainMenuButton.Click += (sender, e) =>
+            if (isGameClear)
             {
-                MainForm.Instance.SetForm<MainMenuForm>();
-            };
+                mainMenuButton.Text = "점수 등록하기";
+                mainMenuButton.Click += (sender, e) =>
+                {
+                    MainForm.Instance.SetForm<ScoreForm>();
+                };
+            }
+            else
+            {
+                mainMenuButton.Text = "처음화면으로";
+                mainMenuButton.Click += (sender, e) =>
+                {
+                    MainForm.Instance.SetForm<MainMenuForm>();
+                };
+            }
+
+
+            PlayerData.Score = _score;
+            _gameOverReason = reason;
+            _isGameOver = true;
 
             Controls.Add(mainMenuButton);
-            mainMenuButton.Focus();
-            _isGameOver = true;
         }
 
         private void SetInvincible()
@@ -552,6 +586,17 @@ namespace ShootingStar
                 pausePanel.Visible = !pausePanel.Visible;
                 _pause = true;
                 resumeButton.Focus();
+            }
+        }
+
+        private void timeLimtTimer_Tick(object sender, EventArgs e)
+        {
+            _timeLimit--;
+
+            if (_timeLimit <= 0)
+            {
+                timeLimtTimer.Stop();
+                SetGameOver("시간 종료", true);
             }
         }
     }

@@ -37,6 +37,7 @@
             this.pauseLabel = new System.Windows.Forms.Label();
             this.restartButton = new System.Windows.Forms.Button();
             this.mainMenuButton = new System.Windows.Forms.Button();
+            this.timeLimtTimer = new System.Windows.Forms.Timer(this.components);
             this.pausePanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -62,6 +63,7 @@
             this.pausePanel.Name = "pausePanel";
             this.pausePanel.Size = new System.Drawing.Size(307, 230);
             this.pausePanel.TabIndex = 0;
+            this.pausePanel.Visible = false;
             // 
             // resumeButton
             // 
@@ -109,6 +111,11 @@
             this.mainMenuButton.UseVisualStyleBackColor = true;
             this.mainMenuButton.Click += new System.EventHandler(this.mainMenuButton_Click);
             // 
+            // timeLimtTimer
+            // 
+            this.timeLimtTimer.Interval = 1000;
+            this.timeLimtTimer.Tick += new System.EventHandler(this.timeLimtTimer_Tick);
+            // 
             // GameForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
@@ -136,6 +143,7 @@
         private System.Windows.Forms.Label pauseLabel;
         private System.Windows.Forms.Button mainMenuButton;
         private System.Windows.Forms.Button restartButton;
+        private System.Windows.Forms.Timer timeLimtTimer;
     }
 }
 

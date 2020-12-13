@@ -5,12 +5,12 @@ using ShootingStar.Game;
 
 namespace ShootingStar
 {
-    public partial class MainMenuForm : Form
+    public partial class LeaderboardForm : Form
     {
         private readonly Bitmap _buffer;
         private readonly Graphics _graphics;
 
-        public MainMenuForm()
+        public LeaderboardForm()
         {
             InitializeComponent();
 
@@ -19,21 +19,26 @@ namespace ShootingStar
             _graphics.Clear(Color.Blue);
             GlobalBackground.Instance.Draw(_graphics);
 
-            title.Font = new Font(CustomFont.NeoDgmPro, 32);
-            startButton.Font = new Font(CustomFont.NeoDgmPro, 16);
-            helpButton.Font = new Font(CustomFont.NeoDgmPro, 16);
-            exitButton.Font = new Font(CustomFont.NeoDgmPro, 16);
+            leaderboardListView.Font = new Font(CustomFont.NeoDgmPro, 16);
+            mainMenuButton.Font = new Font(CustomFont.NeoDgmPro, 16);
         }
 
-        private void MainMenu_Load(object sender, EventArgs e)
+        private void LeaderboardForm_Load(object sender, EventArgs e)
         {
             Invalidate();
             tickTimer.Start();
+
+            foreach (var item in Leaderboard.Data)
+            {
+                leaderboardListView.Items.Add(
+                    new ListViewItem(new string[] { item.Name, item.Score.ToString() }));
+            }
         }
 
-        private void MainMenu_Paint(object sender, PaintEventArgs e)
+        private void LeaderboardForm_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.DrawImage(_buffer, 0, 0);
+
         }
 
         protected override void OnPaintBackground(PaintEventArgs e)
@@ -48,19 +53,9 @@ namespace ShootingStar
             Invalidate();
         }
 
-        private void startButton_Click(object sender, EventArgs e)
+        private void mainMenuButton_Click(object sender, EventArgs e)
         {
-            MainForm.Instance.SetForm<GameForm>();
-        }
-
-        private void helpButton_Click(object sender, EventArgs e)
-        {
-            MainForm.Instance.SetForm<HelpForm>();
-        }
-
-        private void exitButton_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
+            MainForm.Instance.SetForm<MainMenuForm>();
         }
     }
 }
