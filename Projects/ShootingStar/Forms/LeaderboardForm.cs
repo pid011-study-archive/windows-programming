@@ -3,14 +3,14 @@ using System.Drawing;
 using System.Windows.Forms;
 using ShootingStar.Game;
 
-namespace ShootingStar
+namespace ShootingStar.Forms
 {
-    public partial class HelpForm : Form
+    public partial class LeaderboardForm : Form
     {
         private readonly Bitmap _buffer;
         private readonly Graphics _graphics;
 
-        public HelpForm()
+        public LeaderboardForm()
         {
             InitializeComponent();
 
@@ -19,21 +19,26 @@ namespace ShootingStar
             _graphics.Clear(Color.Blue);
             GlobalBackground.Instance.Draw(_graphics);
 
-            descLabel1.Font = new Font(CustomFont.NeoDgmPro, 16);
-            descLabel2.Font = new Font(CustomFont.NeoDgmPro, 16);
-            descLabel3.Font = new Font(CustomFont.NeoDgmPro, 16);
+            leaderboardListView.Font = new Font(CustomFont.NeoDgmPro, 16);
             mainMenuButton.Font = new Font(CustomFont.NeoDgmPro, 16);
         }
 
-        private void HelpForm_Load(object sender, EventArgs e)
+        private void LeaderboardForm_Load(object sender, EventArgs e)
         {
             Invalidate();
             tickTimer.Start();
+
+            foreach (var item in Leaderboard.Data)
+            {
+                leaderboardListView.Items.Add(
+                    new ListViewItem(new string[] { item.Name, item.Score.ToString() }));
+            }
         }
 
-        private void HelpForm_Paint(object sender, PaintEventArgs e)
+        private void LeaderboardForm_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.DrawImage(_buffer, 0, 0);
+
         }
 
         protected override void OnPaintBackground(PaintEventArgs e)
@@ -46,14 +51,6 @@ namespace ShootingStar
             GlobalBackground.Instance.Update();
             GlobalBackground.Instance.Draw(_graphics);
             Invalidate();
-        }
-
-        private void HelpForm_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Escape)
-            {
-                MainForm.Instance.SetForm<MainMenuForm>();
-            }
         }
 
         private void mainMenuButton_Click(object sender, EventArgs e)

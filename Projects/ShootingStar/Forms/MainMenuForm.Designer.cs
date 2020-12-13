@@ -1,5 +1,5 @@
 ﻿
-namespace ShootingStar
+namespace ShootingStar.Forms
 {
     partial class MainMenuForm
     {

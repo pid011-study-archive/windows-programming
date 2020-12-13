@@ -1,4 +1,6 @@
-﻿namespace ShootingStar.Game
+﻿using ShootingStar.Forms;
+
+namespace ShootingStar.Game
 {
     public class EnemyBullet : UnitBase
     {

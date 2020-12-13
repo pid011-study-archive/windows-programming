@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using ShootingStar.Forms;
 
 namespace ShootingStar.Game
 {

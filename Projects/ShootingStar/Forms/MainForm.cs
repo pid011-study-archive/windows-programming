@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace ShootingStar
+namespace ShootingStar.Forms
 {
     public partial class MainForm : Form
     {

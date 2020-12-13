@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using ShootingStar.Game;
 
-namespace ShootingStar
+namespace ShootingStar.Forms
 {
     public partial class ScoreForm : Form
     {

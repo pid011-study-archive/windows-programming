@@ -7,7 +7,7 @@ using System.Windows.Forms;
 using ShootingStar.Game;
 using ShootingStar.Properties;
 
-namespace ShootingStar
+namespace ShootingStar.Forms
 {
     public partial class GameForm : Form
     {
