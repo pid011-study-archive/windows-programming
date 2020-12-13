@@ -35,11 +35,26 @@ namespace ShootingStar
 
         private bool _isGameOver;
 
-        private readonly Font _gameOverFont = new Font(CustomFont.NeoDgm, 32);
+        private bool _attacked;
+
+        private bool _isInvincible;
+        private int _invincibleCount;
+        private bool _isPlayerVisible = true;
+
+        private int _score;
+        private bool _pause;
+
+        private readonly Font _gameOverFont = new Font(CustomFont.NeoDgmPro, 32);
+        private readonly Font _scoreFont = new Font(CustomFont.NeoDgmPro, 16);
 
         public GameForm()
         {
             InitializeComponent();
+            pauseLabel.Font = new Font(CustomFont.NeoDgmPro, 32);
+            resumeButton.Font = new Font(CustomFont.NeoDgmPro, 16);
+            restartButton.Font = new Font(CustomFont.NeoDgmPro, 16);
+            mainMenuButton.Font = new Font(CustomFont.NeoDgmPro, 16);
+            pausePanel.Visible = false;
         }
 
         private void MainGame_Load(object sender, EventArgs e)
@@ -56,7 +71,7 @@ namespace ShootingStar
 
             _player = new PlayerUnit(this)
             {
-                MaxHp = 1,
+                MaxHp = 3,
                 Speed = 10,
                 FireRate = 5,
                 UnitImage = Resources.image_fighter0,
@@ -112,11 +127,21 @@ namespace ShootingStar
                 Speed = 10,
                 UnitImage = enemyBulletImage,
             };
+
+            _score = 0;
         }
 
         private void MainGame_Paint(object sender, PaintEventArgs e)
         {
-            e.Graphics.DrawImage(_buffer, 0, 0);
+            if (_attacked)
+            {
+                e.Graphics.DrawImage(_buffer, 15, 20);
+                _attacked = false;
+            }
+            else
+            {
+                e.Graphics.DrawImage(_buffer, 0, 0);
+            }
         }
 
         protected override void OnPaintBackground(PaintEventArgs e)
@@ -127,29 +152,23 @@ namespace ShootingStar
         {
             _graphics.Clear(Color.Black);
 
-            GlobalBackground.Instance.Update();
+            if (!_pause)
+            {
+                GlobalBackground.Instance.Update();
 
-            UpdateUnits();
-            CheckUnitDetect();
-            UpdateAnimation();
+                UpdateUnits();
+                CheckUnitDetect();
+                UpdateAnimation();
 
-            RefreshAll();
+                RefreshAll();
+            }
 
             GlobalBackground.Instance.Draw(_graphics);
             DrawUnits();
             DrawAnimations();
-
-            if (_isGameOver)
-            {
-                _graphics.DrawString(
-                    "GAME OVER",
-                    _gameOverFont,
-                    Brushes.White,
-                    ClientSize.Width / 2,
-                    ClientSize.Height / 2 - 50,
-                    new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center }
-                    );
-            }
+            DrawPlayerHeart();
+            DrawScore();
+            DrawGameOverUI();
 
             Invalidate();
         }
@@ -207,7 +226,11 @@ namespace ShootingStar
             if (_player.IsAlive)
             {
                 DetectPlayerBulletCollision();
-                DetectEnemyBulletCollision();
+
+                if (!_isInvincible)
+                {
+                    DetectEnemyBulletCollision();
+                }
             }
         }
 
@@ -234,7 +257,7 @@ namespace ShootingStar
         private void DrawUnits()
         {
             // Draw player
-            if (_player.IsAlive)
+            if (_player.IsAlive && _isPlayerVisible)
             {
                 _player.Draw(_graphics);
             }
@@ -267,6 +290,46 @@ namespace ShootingStar
 
             _playerDestroy?.Draw(_graphics);
         }
+
+        private void DrawPlayerHeart()
+        {
+            var drawPosition = new Point(10, 10);
+
+            var distance = Resources.image_heart.Width + 5;
+
+            for (var i = 0; i < _player.Hp; i++)
+            {
+                _graphics.DrawImage(Resources.image_heart, drawPosition);
+                drawPosition.X += distance;
+            }
+        }
+
+        private void DrawScore()
+        {
+            var drawPosition = new Point(ClientSize.Width - 10, 10);
+            var strformat = new StringFormat
+            {
+                Alignment = StringAlignment.Far,
+                LineAlignment = StringAlignment.Near
+            };
+
+            _graphics.DrawString($"현재 점수 : {_score}점", _scoreFont, Brushes.White, drawPosition, strformat);
+        }
+
+        private void DrawGameOverUI()
+        {
+            if (_isGameOver)
+            {
+                _graphics.DrawString(
+                    "당신은 파괴되었습니다",
+                    _gameOverFont,
+                    Brushes.White,
+                    ClientSize.Width / 2,
+                    ClientSize.Height / 2 - 50,
+                    new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center });
+            }
+        }
+
         private void SpawnEnemy()
         {
             if (_enemies.Count < 10)
@@ -334,9 +397,28 @@ namespace ShootingStar
                     if (DetectCollision(bullet, enemy))
                     {
                         bullet.IsAlive = false;
+
                         enemy.Hp--;
+
                         if (enemy.Hp <= 0)
                         {
+                            // HP가 2인 enemy0을 잡으면 score +2 주기
+                            switch (enemy.EnemyType)
+                            {
+                                case 0:
+                                    _score += 2;
+                                    break;
+
+                                case 1:
+                                case 2:
+                                    _score += 1;
+                                    break;
+
+                                default:
+                                    _score++;
+                                    break;
+                            }
+
                             enemy.IsAlive = false;
                             _enemyDestories.Add(new EnemyDestroyAnimation(enemy.Position));
                         }
@@ -353,11 +435,20 @@ namespace ShootingStar
                 {
                     bullet.IsAlive = false;
                     _player.Hp--;
+
+                    // 피격 모션 화면 흔들기
+                    _attacked = true;
+
                     if (_player.Hp <= 0)
                     {
                         _player.IsAlive = false;
                         _playerDestroy = new PlayerDestroyAnimation(_player.Position);
                         SetGameOver();
+                    }
+                    else
+                    {
+                        // 피격 후 무적
+                        SetInvincible();
                     }
                 }
             }
@@ -394,11 +485,12 @@ namespace ShootingStar
                 Name = "mainMenuButton",
                 TabIndex = 0,
                 ForeColor = Color.FromArgb(64, 64, 64),
-                MaximumSize = new Size(200, 50),
-                Size = new Size(200, 50),
-                Text = "메인메뉴로 이동",
-                Font = new Font(CustomFont.NeoDgm, 16),
+                MaximumSize = new Size(250, 50),
+                Size = new Size(250, 50),
+                Text = "처음화면으로 이동",
+                Font = new Font(CustomFont.NeoDgmPro, 16),
             };
+
             mainMenuButton.Location = new Point(
                 (ClientSize.Width / 2) - (mainMenuButton.Size.Width / 2),
                 (ClientSize.Height / 2) - (mainMenuButton.Size.Height / 2));
@@ -409,7 +501,58 @@ namespace ShootingStar
             };
 
             Controls.Add(mainMenuButton);
+            mainMenuButton.Focus();
             _isGameOver = true;
+        }
+
+        private void SetInvincible()
+        {
+            _invincibleCount = 3;
+            _isInvincible = true;
+            _isPlayerVisible = false;
+            invincibleTimer.Start();
+        }
+
+        private void invincibleTimer_Tick(object sender, EventArgs e)
+        {
+            _isPlayerVisible = !_isPlayerVisible;
+            if (_isPlayerVisible)
+            {
+                _invincibleCount--;
+            }
+
+            if (_invincibleCount <= 0)
+            {
+                _isInvincible = false;
+                _isPlayerVisible = true;
+                invincibleTimer.Stop();
+            }
+        }
+
+        private void resumeButton_Click(object sender, EventArgs e)
+        {
+            _pause = false;
+            pausePanel.Visible = false;
+        }
+
+        private void restartButton_Click(object sender, EventArgs e)
+        {
+            MainForm.Instance.SetForm<GameForm>();
+        }
+
+        private void mainMenuButton_Click(object sender, EventArgs e)
+        {
+            MainForm.Instance.SetForm<MainMenuForm>();
+        }
+
+        private void GameForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (!_pause && e.KeyCode == Keys.Escape)
+            {
+                pausePanel.Visible = !pausePanel.Visible;
+                _pause = true;
+                resumeButton.Focus();
+            }
         }
     }
 }

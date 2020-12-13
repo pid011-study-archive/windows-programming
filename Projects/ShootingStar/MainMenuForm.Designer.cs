@@ -60,7 +60,7 @@ namespace ShootingStar
             // 
             // title
             // 
-            this.title.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.title.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.title.AutoSize = true;
             this.title.BackColor = System.Drawing.Color.Transparent;
@@ -75,8 +75,8 @@ namespace ShootingStar
             // 
             // helpButton
             // 
-            this.helpButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.helpButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.helpButton.BackColor = System.Drawing.Color.Transparent;
             this.helpButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
@@ -93,8 +93,8 @@ namespace ShootingStar
             // 
             // exitButton
             // 
-            this.exitButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.exitButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.exitButton.BackColor = System.Drawing.Color.Transparent;
             this.exitButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
@@ -119,11 +119,8 @@ namespace ShootingStar
             this.Controls.Add(this.startButton);
             this.Controls.Add(this.helpButton);
             this.Controls.Add(this.exitButton);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximizeBox = false;
             this.Name = "MainMenuForm";
-            this.Text = "ShootingStar";
+            this.Text = "MainMenuForm";
             this.Load += new System.EventHandler(this.MainMenu_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.MainMenu_Paint);
             this.ResumeLayout(false);

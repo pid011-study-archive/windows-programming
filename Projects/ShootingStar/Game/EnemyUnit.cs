@@ -39,6 +39,13 @@
             }
         }
 
+        public override void Init(UnitBase init)
+        {
+            base.Init(init);
+
+            EnemyType = (init is EnemyUnit enemy) ? enemy.EnemyType : -1;
+        }
+
         public override void Update()
         {
             base.Update();

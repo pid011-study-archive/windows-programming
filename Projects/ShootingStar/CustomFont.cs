@@ -11,14 +11,14 @@ namespace ShootingStar
         private static extern IntPtr AddFontMemResourceEx(
             IntPtr pbFont, uint cbFont, IntPtr pdv, [System.Runtime.InteropServices.In] ref uint pcFonts);
 
-        public static FontFamily NeoDgm { get; }
+        public static FontFamily NeoDgmPro { get; }
 
         static CustomFont()
         {
-            NeoDgm = InitNeoDgm();
+            NeoDgmPro = InitNeoDgmPro();
         }
 
-        private static FontFamily InitNeoDgm()
+        private static FontFamily InitNeoDgmPro()
         {
             var fonts = new PrivateFontCollection();
 
