@@ -566,6 +566,7 @@ namespace ShootingStar.Forms
         private void resumeButton_Click(object sender, EventArgs e)
         {
             _pause = false;
+            timeLimtTimer.Start();
             pausePanel.Visible = false;
         }
 
@@ -585,6 +586,7 @@ namespace ShootingStar.Forms
             {
                 pausePanel.Visible = !pausePanel.Visible;
                 _pause = true;
+                timeLimtTimer.Stop();
                 resumeButton.Focus();
             }
         }
