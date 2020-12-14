@@ -134,7 +134,7 @@ namespace ShootingStar.Forms
             };
 
             _score = 0;
-            _timeLimit = 20;
+            _timeLimit = 60;
             timeLimtTimer.Start();
         }
 
